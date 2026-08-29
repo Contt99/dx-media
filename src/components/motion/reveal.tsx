@@ -2,6 +2,7 @@
 
 import { motion, useReducedMotion } from "framer-motion";
 import type { ReactNode } from "react";
+import { DX_EASE } from "@/components/motion/tokens";
 
 type RevealProps = {
   children: ReactNode;
@@ -27,9 +28,9 @@ export function Reveal({
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, amount }}
       transition={{
-        duration: shouldReduceMotion ? 0 : 0.72,
+        duration: shouldReduceMotion ? 0 : 0.45,
         delay: shouldReduceMotion ? 0 : delay,
-        ease: [0.22, 1, 0.36, 1],
+        ease: DX_EASE,
       }}
     >
       {children}

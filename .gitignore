@@ -23,6 +23,8 @@
 # local caches and source materials
 /.pnpm-store/
 /.tmp/
+/.pptx-work/
+*.pptx.inspect.ndjson
 *.pptx
 
 # misc

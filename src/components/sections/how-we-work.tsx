@@ -1,109 +1,94 @@
 "use client";
 
-import { motion, useReducedMotion } from "framer-motion";
+import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
 import { useRef, useState } from "react";
 import { Reveal } from "@/components/motion/reveal";
+import { dxTransition } from "@/components/motion/tokens";
 import { siteContent } from "@/content/site";
 
 const orbitNodes = [
   {
     left: "50%",
-    top: "8%",
-    labelClass: "left-1/2 top-[calc(100%+0.65rem)] -translate-x-1/2",
+    top: "9%",
+    labelClass: "left-1/2 top-[calc(100%+0.6rem)] -translate-x-1/2",
   },
   {
     left: "86%",
     top: "29%",
     labelClass:
-      "right-[calc(100%+0.65rem)] top-1/2 -translate-y-1/2 text-right",
+      "right-[calc(100%+0.6rem)] top-1/2 -translate-y-1/2 text-right",
   },
   {
     left: "86%",
     top: "71%",
     labelClass:
-      "right-[calc(100%+0.65rem)] top-1/2 -translate-y-1/2 text-right",
+      "right-[calc(100%+0.6rem)] top-1/2 -translate-y-1/2 text-right",
   },
   {
     left: "50%",
-    top: "92%",
-    labelClass: "bottom-[calc(100%+0.65rem)] left-1/2 -translate-x-1/2",
+    top: "91%",
+    labelClass: "bottom-[calc(100%+0.6rem)] left-1/2 -translate-x-1/2",
   },
   {
     left: "14%",
     top: "71%",
     labelClass:
-      "left-[calc(100%+0.65rem)] top-1/2 -translate-y-1/2 text-left",
+      "left-[calc(100%+0.6rem)] top-1/2 -translate-y-1/2 text-left",
   },
   {
     left: "14%",
     top: "29%",
     labelClass:
-      "left-[calc(100%+0.65rem)] top-1/2 -translate-y-1/2 text-left",
+      "left-[calc(100%+0.6rem)] top-1/2 -translate-y-1/2 text-left",
   },
 ] as const;
 
 export function HowWeWork() {
   const content = siteContent.howWeWork;
   const [activeIndex, setActiveIndex] = useState(0);
-  const moduleRefs = useRef<(HTMLElement | null)[]>([]);
-  const modulesLayoutRef = useRef<HTMLDivElement>(null);
-  const orbitPanelRef = useRef<HTMLDivElement>(null);
+  const tabRefs = useRef<(HTMLButtonElement | null)[]>([]);
   const shouldReduceMotion = useReducedMotion();
+  const activeModule = content.modules[activeIndex];
 
-  const handleNodeClick = (index: number) => {
-    setActiveIndex(index);
+  const selectFromKeyboard = (
+    event: React.KeyboardEvent<HTMLButtonElement>,
+    index: number,
+  ) => {
+    let nextIndex = index;
 
-    const target = moduleRefs.current[index];
-    const layout = modulesLayoutRef.current;
-    const orbitPanel = orbitPanelRef.current;
-
-    if (!target || !layout || !orbitPanel) {
+    if (event.key === "ArrowRight" || event.key === "ArrowDown") {
+      nextIndex = (index + 1) % content.modules.length;
+    } else if (event.key === "ArrowLeft" || event.key === "ArrowUp") {
+      nextIndex =
+        (index - 1 + content.modules.length) % content.modules.length;
+    } else if (event.key === "Home") {
+      nextIndex = 0;
+    } else if (event.key === "End") {
+      nextIndex = content.modules.length - 1;
+    } else {
       return;
     }
 
-    const currentScrollY = window.scrollY;
-    const targetRect = target.getBoundingClientRect();
-    const layoutRect = layout.getBoundingClientRect();
-    const stickyTop = Number.parseFloat(
-      window.getComputedStyle(orbitPanel).top,
-    );
-    const centeredScrollTop =
-      currentScrollY +
-      targetRect.top -
-      (window.innerHeight - targetRect.height) / 2;
-    const pinnedStart = currentScrollY + layoutRect.top - stickyTop;
-    const pinnedEnd =
-      currentScrollY +
-      layoutRect.bottom -
-      orbitPanel.offsetHeight -
-      stickyTop;
-    const targetScrollTop =
-      pinnedEnd > pinnedStart
-        ? Math.min(Math.max(centeredScrollTop, pinnedStart), pinnedEnd)
-        : centeredScrollTop;
-
-    window.scrollTo({
-      top: Math.max(0, targetScrollTop),
-      left: window.scrollX,
-      behavior: shouldReduceMotion ? "auto" : "smooth",
-    });
+    event.preventDefault();
+    setActiveIndex(nextIndex);
+    tabRefs.current[nextIndex]?.focus();
   };
 
   return (
     <section
       id="how-we-work"
       aria-labelledby="how-we-work-title"
-      className="bg-paper px-4 py-24 text-ink sm:px-8 sm:py-32 lg:px-12 lg:py-40"
+      className="min-h-[108svh] bg-paper px-4 py-24 text-ink sm:px-8 sm:py-28 lg:px-12 lg:py-16"
     >
       <div className="mx-auto max-w-[1600px]">
         <Reveal>
-          <header className="grid gap-8 border-t border-ink pt-5 lg:grid-cols-12">
+          <header className="grid gap-7 border-t border-ink pt-5 lg:grid-cols-12 lg:gap-8">
             <p className="text-xs font-bold uppercase tracking-[0.16em] text-dx-red lg:col-span-2">
               {content.label}
             </p>
             <h2
               id="how-we-work-title"
-              className="display-type whitespace-pre-line text-[clamp(3.8rem,8vw,8rem)] uppercase leading-[0.84] tracking-[-0.075em] lg:col-span-7"
+              className="display-type whitespace-pre-line text-[2.3rem] uppercase leading-[0.84] tracking-[-0.075em] sm:text-[clamp(3.4rem,6vw,6.5rem)] lg:col-span-7"
             >
               {content.title}
             </h2>
@@ -114,7 +99,7 @@ export function HowWeWork() {
         </Reveal>
 
         <Reveal>
-          <div className="mt-16 grid gap-5 border-y border-ink py-5 text-xs font-bold uppercase tracking-[0.14em] sm:grid-cols-3 lg:mt-24">
+          <div className="mt-10 grid gap-4 border-y border-ink py-4 text-xs font-bold uppercase tracking-[0.14em] sm:grid-cols-3">
             <p className="text-dx-red">{content.modelName}</p>
             {content.modelMeta.map((item) => (
               <p key={item} className="sm:text-right">
@@ -124,62 +109,58 @@ export function HowWeWork() {
           </div>
         </Reveal>
 
-        <div
-          ref={modulesLayoutRef}
-          className="mt-16 grid lg:mt-24 lg:grid-cols-12 lg:gap-12"
-        >
-          <div className="lg:col-span-5">
-            {content.modules.map((module, index) => {
-              const active = activeIndex === index;
-
-              return (
-                <motion.article
-                  key={module.number}
-                  ref={(node) => {
-                    moduleRefs.current[index] = node;
-                  }}
-                  onViewportEnter={() => setActiveIndex(index)}
-                  viewport={{ amount: 0.58 }}
-                  initial={false}
-                  animate={{ opacity: active ? 1 : 0.42 }}
-                  transition={{ duration: shouldReduceMotion ? 0 : 0.4 }}
-                  className="relative flex min-h-[34vh] flex-col justify-center border-t border-ink py-10 last:border-b sm:min-h-[38vh] lg:min-h-[55vh] lg:py-16"
-                >
-                  <motion.span
-                    aria-hidden="true"
-                    className="absolute left-0 top-[-1px] h-[2px] bg-dx-red"
-                    initial={false}
-                    animate={{ width: active ? "5rem" : "0rem" }}
-                    transition={{ duration: shouldReduceMotion ? 0 : 0.45 }}
-                  />
-                  <div className="grid grid-cols-[3rem_1fr] gap-4 sm:grid-cols-[4rem_1fr]">
-                    <p className="pt-1 text-xs font-bold text-dx-red">
-                      {module.number}
-                    </p>
-                    <div>
-                      <p className="text-[0.65rem] font-bold uppercase tracking-[0.16em] text-muted">
-                        {module.signal} / {module.titleEn}
-                      </p>
-                      <h3 className="mt-4 text-[clamp(2.1rem,4vw,4rem)] font-bold leading-none tracking-[-0.055em]">
-                        {module.title}
-                      </h3>
-                      <p className="mt-6 max-w-lg text-sm leading-7 text-muted sm:text-base">
-                        {module.description}
-                      </p>
-                    </div>
-                  </div>
-                </motion.article>
-              );
-            })}
+        <div className="mt-9 grid gap-8 lg:h-[clamp(31rem,52vh,37rem)] lg:grid-cols-12 lg:gap-10">
+          <div
+            id="capability-panel"
+            role="tabpanel"
+            aria-labelledby={`capability-tab-${activeIndex}`}
+            tabIndex={0}
+            className="relative flex min-h-[22rem] overflow-hidden border-y border-ink/25 lg:col-span-5 lg:h-full lg:min-h-0"
+          >
+            <span
+              aria-hidden="true"
+              className="display-type absolute right-4 top-2 text-[clamp(8rem,15vw,15rem)] leading-none tracking-[-0.09em] text-ink/[0.035]"
+            >
+              {activeModule.number}
+            </span>
+            <AnimatePresence mode="wait" initial={false}>
+              <motion.article
+                key={activeModule.number}
+                initial={
+                  shouldReduceMotion
+                    ? { opacity: 1 }
+                    : { opacity: 0, y: 20 }
+                }
+                animate={{ opacity: 1, y: 0 }}
+                exit={
+                  shouldReduceMotion
+                    ? { opacity: 0 }
+                    : { opacity: 0, y: -20 }
+                }
+                transition={dxTransition(shouldReduceMotion)}
+                className="relative z-10 flex w-full flex-col justify-end p-6 sm:p-9 lg:p-10 xl:p-12"
+              >
+                <div className="flex items-center gap-4 text-xs font-bold uppercase tracking-[0.16em]">
+                  <span className="text-dx-red">{activeModule.number}</span>
+                  <span className="h-px w-10 bg-ink/25" />
+                  <span className="text-muted">
+                    {activeModule.signal} / {activeModule.titleEn}
+                  </span>
+                </div>
+                <h3 className="mt-6 text-[clamp(2.8rem,5vw,5.8rem)] font-bold leading-none tracking-[-0.06em]">
+                  {activeModule.title}
+                </h3>
+                <p className="mt-7 max-w-lg text-sm leading-7 text-muted sm:text-base">
+                  {activeModule.description}
+                </p>
+              </motion.article>
+            </AnimatePresence>
           </div>
 
-          <div
-            ref={orbitPanelRef}
-            className="order-first sticky top-[var(--header-height)] z-10 mb-14 h-[min(86vw,26rem)] self-start bg-paper lg:order-none lg:col-span-7 lg:top-28 lg:mb-0 lg:h-[calc(100vh-9rem)] lg:max-h-[760px] lg:min-h-[600px]"
-          >
+          <div className="order-first min-h-[23rem] sm:min-h-[30rem] lg:order-none lg:col-span-7 lg:h-full lg:min-h-0">
             <div
-              role="group"
-              aria-label="DX 引力模型能力导航"
+              role="tablist"
+              aria-label="DX 引力模型六大能力模块"
               className="relative h-full overflow-hidden border-y border-ink/25 bg-paper"
             >
               <p className="absolute left-4 top-4 z-20 text-[0.6rem] font-bold uppercase tracking-[0.16em] text-muted sm:left-6 sm:top-6">
@@ -266,19 +247,29 @@ export function HowWeWork() {
                     style={{ left: position.left, top: position.top }}
                   >
                     <motion.button
-                      type="button"
-                      aria-label={`跳转到${capability.title}`}
-                      aria-pressed={active}
-                      onClick={() => handleNodeClick(index)}
-                      initial={false}
-                      animate={{ scale: active ? 1.22 : 1 }}
-                      whileHover={shouldReduceMotion ? undefined : { scale: active ? 1.26 : 1.08 }}
-                      whileTap={shouldReduceMotion ? undefined : { scale: 0.96 }}
-                      transition={{
-                        duration: shouldReduceMotion ? 0 : 0.3,
-                        ease: [0.22, 1, 0.36, 1],
+                      ref={(node) => {
+                        tabRefs.current[index] = node;
                       }}
-                      className={`relative flex h-8 w-8 cursor-pointer items-center justify-center rounded-full border text-[0.58rem] font-bold transition-colors duration-300 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-dx-red sm:h-10 sm:w-10 ${
+                      id={`capability-tab-${index}`}
+                      type="button"
+                      role="tab"
+                      aria-label={`${capability.number} ${capability.title}`}
+                      aria-selected={active}
+                      aria-controls="capability-panel"
+                      tabIndex={active ? 0 : -1}
+                      onClick={() => setActiveIndex(index)}
+                      onFocus={() => setActiveIndex(index)}
+                      onKeyDown={(event) => selectFromKeyboard(event, index)}
+                      initial={false}
+                      animate={{ scale: active ? 1.2 : 1 }}
+                      whileHover={
+                        shouldReduceMotion
+                          ? undefined
+                          : { scale: active ? 1.23 : 1.08 }
+                      }
+                      whileTap={shouldReduceMotion ? undefined : { scale: 0.96 }}
+                      transition={dxTransition(shouldReduceMotion, 0.3)}
+                      className={`relative flex h-8 w-8 cursor-pointer items-center justify-center rounded-full border text-[0.58rem] font-bold focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-dx-red sm:h-10 sm:w-10 ${
                         active
                           ? "border-dx-red bg-dx-red text-paper"
                           : "border-ink/30 bg-paper text-muted hover:border-ink hover:text-ink"
@@ -292,15 +283,12 @@ export function HowWeWork() {
                       className={`pointer-events-none absolute whitespace-nowrap ${position.labelClass}`}
                     >
                       <motion.span
-                        className={`block text-[0.62rem] font-bold tracking-[-0.01em] transition-colors duration-300 sm:text-xs ${
+                        className={`block text-[0.58rem] font-bold tracking-[-0.01em] sm:text-xs ${
                           active ? "text-dx-red" : "text-muted"
                         }`}
                         initial={false}
                         animate={{ scale: active ? 1.12 : 1 }}
-                        transition={{
-                          duration: shouldReduceMotion ? 0 : 0.3,
-                          ease: [0.22, 1, 0.36, 1],
-                        }}
+                        transition={dxTransition(shouldReduceMotion, 0.3)}
                       >
                         {capability.title}
                       </motion.span>
@@ -309,10 +297,14 @@ export function HowWeWork() {
                 );
               })}
 
-              <div className="absolute left-1/2 top-1/2 flex h-[7.5rem] w-[7.5rem] -translate-x-1/2 -translate-y-1/2 flex-col items-center justify-center rounded-full bg-ink text-center text-paper sm:h-36 sm:w-36 lg:h-44 lg:w-44">
+              <div className="absolute left-1/2 top-1/2 flex h-[7.5rem] w-[7.5rem] -translate-x-1/2 -translate-y-1/2 flex-col items-center justify-center rounded-full bg-ink text-center text-paper sm:h-36 sm:w-36 lg:h-40 lg:w-40 xl:h-44 xl:w-44">
                 <motion.span
                   className="mb-3 h-2 w-2 rounded-full bg-dx-red"
-                  animate={shouldReduceMotion ? undefined : { opacity: [0.35, 1, 0.35] }}
+                  animate={
+                    shouldReduceMotion
+                      ? undefined
+                      : { opacity: [0.35, 1, 0.35] }
+                  }
                   transition={{
                     duration: 2.2,
                     repeat: shouldReduceMotion ? 0 : Number.POSITIVE_INFINITY,
@@ -324,25 +316,25 @@ export function HowWeWork() {
                 <strong className="mt-1 text-lg tracking-[-0.04em] sm:text-xl lg:text-2xl">
                   {content.aiEngine.title}
                 </strong>
+                <span className="mt-3 text-[0.52rem] uppercase tracking-[0.12em] text-paper/40">
+                  {content.modelMeta[1]}
+                </span>
               </div>
-
             </div>
           </div>
         </div>
 
         <Reveal>
-          <div className="mt-24 grid gap-8 border-t border-ink pt-8 lg:mt-36 lg:grid-cols-12 lg:pt-12">
+          <div className="mt-9 grid gap-5 border-t border-ink pt-6 lg:grid-cols-12 lg:items-end">
             <p className="text-xs font-bold uppercase tracking-[0.16em] text-dx-red lg:col-span-3">
               {content.aiEngine.titleEn} / Continuous learning
             </p>
-            <div className="lg:col-span-9">
-              <p className="max-w-2xl text-base leading-7 text-muted lg:text-lg lg:leading-8">
-                {content.aiEngine.description}
-              </p>
-              <p className="mt-14 text-balance text-[clamp(2.8rem,7vw,7rem)] font-bold leading-[0.92] tracking-[-0.07em]">
-                {content.closing}
-              </p>
-            </div>
+            <p className="max-w-xl text-sm leading-6 text-muted lg:col-span-4 lg:text-base lg:leading-7">
+              {content.aiEngine.description}
+            </p>
+            <p className="text-balance text-[clamp(2.4rem,4.2vw,4.8rem)] font-bold leading-[0.92] tracking-[-0.065em] lg:col-span-5">
+              {content.closing}
+            </p>
           </div>
         </Reveal>
       </div>
