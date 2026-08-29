@@ -1,0 +1,80 @@
+@import "tailwindcss";
+
+:root {
+  --paper: #f4f3ef;
+  --white: #ffffff;
+  --ink: #0a0a0a;
+  --muted: #6a6965;
+  --line: #d7d5cf;
+  --red: #c8102e;
+  --header-height: 4.5rem;
+}
+
+@theme inline {
+  --color-paper: var(--paper);
+  --color-white: var(--white);
+  --color-ink: var(--ink);
+  --color-muted: var(--muted);
+  --color-line: var(--line);
+  --color-dx-red: var(--red);
+  --font-sans: Arial, Helvetica, "PingFang SC", "Microsoft YaHei", sans-serif;
+  --font-display: Arial, Helvetica, "PingFang SC", "Microsoft YaHei", sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  background: var(--paper);
+  scroll-behavior: smooth;
+}
+
+body {
+  min-width: 20rem;
+  margin: 0;
+  overflow-x: hidden;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: Arial, Helvetica, "PingFang SC", "Microsoft YaHei", sans-serif;
+  text-rendering: optimizeLegibility;
+}
+
+a,
+button {
+  -webkit-tap-highlight-color: transparent;
+}
+
+button {
+  font: inherit;
+}
+
+::selection {
+  background: var(--red);
+  color: var(--white);
+}
+
+.display-type {
+  font-family: Arial, Helvetica, "PingFang SC", "Microsoft YaHei", sans-serif;
+  font-stretch: condensed;
+  font-weight: 800;
+}
+
+.text-balance {
+  text-wrap: balance;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
