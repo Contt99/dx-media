@@ -52,7 +52,7 @@ export const siteContent = {
     why: {
       label: "02 / WHY DX",
       title: "DO THE MATH.\nDO BUSINESS BETTER.",
-      intro: "四则运算，做对生意。",
+      intro: "四则运算，\n做对生意。",
       principles: [
         {
           symbol: "−",

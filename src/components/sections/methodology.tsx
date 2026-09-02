@@ -38,7 +38,7 @@ export function Methodology() {
           <div className="mt-16 grid gap-12 lg:mt-24 lg:grid-cols-12">
             <Reveal className="lg:col-span-3">
               <p className="caps-label text-dx-red">WHY DX</p>
-              <p className="mt-5 max-w-[8em] text-3xl font-bold leading-[1.08] tracking-[-0.05em] sm:text-4xl">
+              <p className="mt-5 max-w-[8em] whitespace-pre text-3xl font-bold leading-[1.08] tracking-[-0.05em] sm:text-4xl">
                 {why.intro}
               </p>
             </Reveal>
