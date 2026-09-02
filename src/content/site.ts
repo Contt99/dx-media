@@ -51,7 +51,7 @@ export const siteContent = {
   methodology: {
     why: {
       label: "02 / WHY DX",
-      title: "DO THE MATH.\nDO BETTER BUSINESS.",
+      title: "DO THE MATH.\nDO BUSINESS BETTER.",
       intro: "四则运算，做对生意。",
       principles: [
         {
