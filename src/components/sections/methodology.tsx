@@ -112,7 +112,10 @@ export function Methodology() {
               </svg>
 
               {how.nodes.map((node, index) => (
-                <div key={node.number} className={`group absolute max-w-64 ${orbitPositions[index]}`}>
+                <div
+                  key={node.number}
+                  className={`group absolute ${index === 3 ? "max-w-none whitespace-nowrap" : "max-w-64"} ${orbitPositions[index]}`}
+                >
                   <p className="caps-label text-dx-red transition-colors duration-300 group-hover:text-ink">
                     {node.number} / {node.meta}
                   </p>
