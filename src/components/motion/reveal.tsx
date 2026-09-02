@@ -22,7 +22,7 @@ export function Reveal({
 
   return (
     <motion.div
-      className={className}
+      className={`reveal ${className ?? ""}`}
       initial={shouldReduceMotion ? {} : { opacity: 0, y: distance }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, amount }}

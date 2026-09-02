@@ -1,22 +1,26 @@
 @import "tailwindcss";
 
 :root {
-  --paper: #f4f3ef;
-  --white: #ffffff;
-  --ink: #0a0a0a;
-  --muted: #6a6965;
-  --line: #d7d5cf;
-  --red: #c8102e;
-  --header-height: 4.5rem;
+  --paper: #f3f0e8;
+  --paper-deep: #e8e3d8;
+  --white: #fbfaf6;
+  --ink: #11110f;
+  --muted: #6d6962;
+  --line: #b9b4aa;
+  --red: #d20f35;
+  --green: #10483b;
+  --header-height: 4.25rem;
 }
 
 @theme inline {
   --color-paper: var(--paper);
+  --color-paper-deep: var(--paper-deep);
   --color-white: var(--white);
   --color-ink: var(--ink);
   --color-muted: var(--muted);
   --color-line: var(--line);
   --color-dx-red: var(--red);
+  --color-dx-green: var(--green);
   --font-sans: Arial, Helvetica, "PingFang SC", "Microsoft YaHei", sans-serif;
   --font-display: Arial, Helvetica, "PingFang SC", "Microsoft YaHei", sans-serif;
 }
@@ -38,6 +42,7 @@ body {
   color: var(--ink);
   font-family: Arial, Helvetica, "PingFang SC", "Microsoft YaHei", sans-serif;
   text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
 }
 
 a,
@@ -60,8 +65,62 @@ button {
   font-weight: 800;
 }
 
+.editorial-shell {
+  width: min(100% - 2rem, 96rem);
+  margin-inline: auto;
+}
+
+.hairline {
+  border-color: color-mix(in srgb, currentColor 24%, transparent);
+}
+
+.caps-label {
+  font-size: 0.67rem;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  line-height: 1.2;
+  text-transform: uppercase;
+}
+
+@media (min-width: 640px) {
+  .editorial-shell {
+    width: min(100% - 4rem, 96rem);
+  }
+}
+
+@media (min-width: 1024px) {
+  .editorial-shell {
+    width: min(100% - 6rem, 96rem);
+  }
+}
+
 .text-balance {
   text-wrap: balance;
+}
+
+html:has(body[data-capture="true"]) {
+  scroll-behavior: auto !important;
+}
+
+body[data-capture="true"] *,
+body[data-capture="true"] *::before,
+body[data-capture="true"] *::after {
+  animation: none !important;
+  transition: none !important;
+}
+
+body[data-capture="true"] .reveal {
+  opacity: 1 !important;
+  transform: none !important;
+}
+
+body[data-capture="true"] .capture-static-card {
+  position: relative !important;
+  top: auto !important;
+}
+
+body[data-capture="true"] .site-header {
+  position: absolute !important;
 }
 
 @media (prefers-reduced-motion: reduce) {

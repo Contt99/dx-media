@@ -66,22 +66,22 @@ export function Header() {
   }, []);
 
   return (
-    <header className="fixed inset-x-0 top-0 z-50 h-[var(--header-height)] border-b border-ink/15 bg-paper">
-      <div className="mx-auto flex h-full max-w-[1600px] items-center justify-between px-4 sm:px-8 lg:px-12">
+    <header className="site-header fixed inset-x-0 top-0 z-50 h-[var(--header-height)] border-b border-ink/20 bg-paper/95">
+      <div className="editorial-shell flex h-full items-center justify-between">
         <a
           href="#top"
           aria-label="返回 DX MEDIA 首页"
-          className="display-type text-[1.05rem] tracking-[-0.04em] text-ink sm:text-lg"
+          className="display-type text-[1.05rem] tracking-[-0.055em] text-ink sm:text-lg"
         >
           D<span className="text-dx-red">X</span> MEDIA
         </a>
 
-        <div className="hidden items-center gap-8 lg:flex">
+        <div className="hidden items-center gap-10 lg:flex">
           <span className="hidden text-[0.67rem] uppercase tracking-[0.18em] text-muted xl:inline">
             Shanghai / China
           </span>
           <nav aria-label="主导航">
-            <ul className="flex items-center gap-5 xl:gap-8">
+            <ul className="flex items-center gap-7 xl:gap-10">
               {siteContent.navigation.map((item) => {
                 const active = activeHref === item.href;
 
@@ -90,7 +90,7 @@ export function Header() {
                     <a
                       href={item.href}
                       aria-current={active ? "location" : undefined}
-                      className={`group flex items-center gap-2 text-[0.65rem] font-bold uppercase tracking-[0.1em] transition-colors duration-300 xl:gap-3 xl:text-xs xl:tracking-[0.12em] ${
+                      className={`group flex items-center gap-2 text-[0.65rem] font-bold uppercase tracking-[0.12em] transition-colors duration-300 xl:gap-3 ${
                         active
                           ? "text-dx-red"
                           : "text-ink hover:text-dx-red"
@@ -100,8 +100,8 @@ export function Header() {
                         aria-hidden="true"
                         className={`h-px origin-left transition-all duration-300 ${
                           active
-                            ? "w-7 bg-dx-red"
-                            : "w-5 bg-ink/25 group-hover:w-7 group-hover:bg-dx-red"
+                            ? "w-6 bg-dx-red"
+                            : "w-3 bg-ink/25 group-hover:w-6 group-hover:bg-dx-red"
                         }`}
                       />
                       {item.label}
