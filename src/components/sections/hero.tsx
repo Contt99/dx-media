@@ -57,7 +57,7 @@ export function Hero() {
 
           <Reveal delay={0.14} className="justify-self-start sm:justify-self-end lg:col-span-2">
             <a
-              href="#capabilities"
+              href="#what-we-do"
               aria-label="向下浏览公司能力"
               className="group flex items-center gap-3 text-[0.65rem] font-bold uppercase tracking-[0.16em]"
             >
