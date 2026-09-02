@@ -12,7 +12,7 @@ export function Capabilities() {
             <header className="grid gap-10 border-t border-paper/35 pt-5 lg:grid-cols-12">
               <p className="caps-label text-dx-red lg:col-span-3">{capabilities.label}</p>
               <p className="caps-label text-paper/50 lg:col-span-5 lg:text-right">{capabilities.meta}</p>
-              <h2 id="capabilities-title" className="display-type min-w-0 whitespace-pre-line text-[clamp(3.3rem,10vw,9.5rem)] uppercase leading-[0.8] tracking-[-0.08em] lg:col-span-8 lg:col-start-1 lg:mt-16">
+              <h2 id="capabilities-title" className="display-type min-w-0 whitespace-pre-line text-[clamp(1.95rem,9vw,7rem)] uppercase leading-[0.8] tracking-[-0.08em] lg:col-span-9 lg:col-start-1 lg:mt-16 lg:text-[clamp(4rem,6.5vw,7rem)]">
                 {capabilities.title}
               </h2>
               <p className="self-end text-xl font-bold tracking-[-0.04em] lg:col-span-3 lg:col-start-10 lg:text-3xl">
