@@ -83,7 +83,7 @@ export const siteContent = {
     how: {
       label: "03 / HOW WE WORK",
       title: "BUILD GRAVITY.\nCREATE MOMENTUM.",
-      intro: "构建引力，创造持续向前的传播动能。",
+      intro: "构建引力，\n创造持续向前的传播动能。",
       model: "DX GRAVITY MODEL",
       nodes: [
         { number: "01", title: "引力场构建", meta: "STRATEGY / GRAVITY FIELD" },

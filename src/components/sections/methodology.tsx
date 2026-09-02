@@ -93,7 +93,7 @@ export function Methodology() {
               >
                 {how.title}
               </h2>
-              <p className="max-w-sm self-end text-lg font-bold leading-snug tracking-[-0.035em] lg:col-span-3 lg:text-right lg:text-2xl">
+              <p className="max-w-sm whitespace-pre self-end text-lg font-bold leading-snug tracking-[-0.035em] lg:col-span-3 lg:text-right lg:text-2xl">
                 {how.intro}
               </p>
             </header>
