@@ -12,7 +12,7 @@ export const siteContent = {
     { label: "How We Work", href: "#how-we-work" },
   ],
   hero: {
-    eyebrow: "Independent Creative Media Partner",
+    eyebrow: "Independent Creative & Media Partner",
     statement: "链接品牌、内容与真实消费人群。",
     scrollLabel: "Scroll to connect",
   },
@@ -97,7 +97,7 @@ export const siteContent = {
     },
   },
   footer: {
-    eyebrow: "INDEPENDENT CREATIVE MEDIA PARTNER",
+    eyebrow: "INDEPENDENT CREATIVE & MEDIA PARTNER",
     copyright: "© 2026 DX MEDIA",
   },
 } satisfies SiteContent;

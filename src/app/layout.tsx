@@ -16,7 +16,7 @@ export const metadata: Metadata = {
   ],
   openGraph: {
     title: "DX MEDIA — Digital X · 链接无限",
-    description: "Independent Creative Media Partner，链接品牌、内容与真实消费人群。",
+    description: "Independent Creative & Media Partner，链接品牌、内容与真实消费人群。",
     type: "website",
     locale: "zh_CN",
     url: "https://contt99.github.io/dx-media/",
@@ -32,7 +32,7 @@ export const metadata: Metadata = {
   twitter: {
     card: "summary_large_image",
     title: "DX MEDIA — Digital X · 链接无限",
-    description: "Independent Creative Media Partner，链接品牌、内容与真实消费人群。",
+    description: "Independent Creative & Media Partner，链接品牌、内容与真实消费人群。",
     images: ["https://contt99.github.io/dx-media/og.png"],
   },
 };
