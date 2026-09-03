@@ -28,7 +28,7 @@ export function Methodology() {
               </p>
               <h2
                 id="why-dx-title"
-                className="display-type min-w-0 whitespace-pre-line text-[clamp(3.3rem,9.2vw,9rem)] uppercase leading-[0.8] tracking-[-0.08em] lg:col-span-8 lg:col-start-5"
+                className="display-type min-w-0 whitespace-pre-line text-[clamp(3.3rem,9.2vw,9rem)] uppercase leading-[0.8] tracking-[-0.08em] lg:col-span-8 lg:col-start-5 lg:whitespace-pre lg:text-[clamp(4.75rem,7.6vw,7.25rem)]"
               >
                 {why.title}
               </h2>

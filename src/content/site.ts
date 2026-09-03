@@ -20,7 +20,7 @@ export const siteContent = {
     label: "01 / WHAT WE DO",
     title: "IDEAS\u00A0COME\u00A0TO\u00A0LIFE\nTHROUGH\nCONNECTION.",
     meta: "INFLUENCER / MEDIA / CONTENT / BRAND",
-    intro: "让创意，在连接中发生。",
+    intro: ["让创意，", "在连接中发生。"],
     services: [
       {
         number: "01",

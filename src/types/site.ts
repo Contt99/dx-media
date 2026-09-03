@@ -39,7 +39,7 @@ export type SiteContent = {
     readonly label: string;
     readonly title: string;
     readonly meta: string;
-    readonly intro: string;
+    readonly intro: readonly [string, string];
     readonly services: readonly Service[];
   };
   readonly methodology: {
